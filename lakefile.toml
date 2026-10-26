@@ -1,0 +1,13 @@
+name = "toml"
+version = "0.1.0"
+defaultTargets = ["Toml", "Proofs", "toml"]
+
+[[lean_lib]]
+name = "Toml"
+
+[[lean_lib]]
+name = "Proofs"
+
+[[lean_exe]]
+name = "toml"
+root = "Main"
