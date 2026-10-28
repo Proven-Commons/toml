@@ -134,7 +134,7 @@ empty document reprints as an empty line.
 
 ## Proved
 
-Kernel-checked cases in `Proofs.lean`, with no sorry:
+Kernel-checked cases in `Toml/Proofs.lean`, with no sorry:
 
 - Scalar acceptance and rejection: booleans, integers in all
   bases, floats, strings, escapes, and malformed values.
@@ -167,7 +167,7 @@ of the IP parser, to make those cases kernel-provable.
 
 ## Limits
 
-- No `Spec.lean` statements or bar files in this slice. A
+- No `Toml/Spec.lean` statements or bar files in this slice. A
   reviewer adds them, as in the other repos.
 - No conversion to a host language value type beyond the
   printed form above.

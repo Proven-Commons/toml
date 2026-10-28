@@ -1,13 +1,14 @@
 name = "toml"
 version = "0.1.0"
 license = "Apache-2.0"
-defaultTargets = ["Toml", "Proofs", "toml"]
+defaultTargets = ["Toml", "TomlProofs", "toml"]
 
 [[lean_lib]]
 name = "Toml"
 
 [[lean_lib]]
-name = "Proofs"
+name = "TomlProofs"
+roots = ["Toml.Proofs"]
 
 [[lean_exe]]
 name = "toml"
