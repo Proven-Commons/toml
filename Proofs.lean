@@ -5,8 +5,9 @@
   validity, the boolean round trip for every boolean, and scalar
   value round trips (integers, floats, strings, datetimes).
 
-  NOT proved here, tested instead: round trips for arrays, inline
-  tables, and whole documents, and full-document acceptance. The
+  General round trips for arrays, inline tables, and whole documents
+  remain unproved, as does full-document acceptance. Named container
+  examples at the end are proved by kernel computation. The
   test harness covers those by differential testing against
   Python tomllib (300 generated documents, 1869 mutations, 77
   fixed valid and 60 fixed invalid cases, all passing; counts in
@@ -95,3 +96,14 @@ example : parseValueFull
     (printValue (.dt (.localDate ⟨2026, 10, 26⟩))) =
     some (.dt (.localDate ⟨2026, 10, 26⟩)) := rfl
 
+
+/-- First container round trip: a singleton integer array, checked by
+    the kernel. General collection theorems remain in progress. -/
+theorem Toml.singleton_int_array_roundtrip :
+    parseValueFull (printValue (.arr [.int 1])) = some (.arr [.int 1]) := rfl
+
+/-- Empty collections round trip through the actual parser and printer. -/
+theorem Toml.empty_collections_roundtrip :
+    parseValueFull (printValue (.arr [])) = some (.arr []) ∧
+    parseValueFull (printValue (.inl [])) = some (.inl []) := by
+  constructor <;> rfl

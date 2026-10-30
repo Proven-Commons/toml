@@ -134,7 +134,7 @@ empty document reprints as an empty line.
 
 ## Proved
 
-Kernel-checked cases in `Proofs.lean`, 37 examples, no sorry:
+Kernel-checked cases in `Proofs.lean`, with no sorry:
 
 - Scalar acceptance and rejection: booleans, integers in all
   bases, floats, strings, escapes, and malformed values.
@@ -145,7 +145,7 @@ Kernel-checked cases in `Proofs.lean`, 37 examples, no sorry:
 
 ## Tested, not proved
 
-Round trips for arrays, inline tables, and whole documents, and
+General round trips for arrays, inline tables, and whole documents, and
 full-document acceptance, are covered by differential testing
 against Python `tomllib` in `tests/run_tests.py`, not by kernel
 proof. The reason is measured: kernel evaluation of this parser
@@ -174,3 +174,18 @@ of the IP parser, to make those cases kernel-provable.
 - The parser fuel is eight times the input length plus 100.
   The printer fuel is 1000000 nesting levels. Neither binds on
   a real document.
+
+## Collection proof work in progress
+
+`Toml.singleton_int_array_roundtrip` proves that `[1]` prints and parses
+back to the same array. `Toml.empty_collections_roundtrip` proves the
+empty array and inline table cases. These run the actual parser and
+printer in the kernel. They do not prove arbitrary collection values.
+
+The remaining theorem must restrict values to the supported subset,
+ensure sufficient printer and parser fuel, and account for canonical
+float parts and unique inline-table keys. The desired array and inline
+table statements preserve every valid element and key path. Document
+round trips must compare semantic entries rather than table construction
+status, because printed headers may make implicit tables explicit.
+Those general statements and proofs remain in progress.
